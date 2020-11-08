@@ -1,8 +1,12 @@
 import tkinter as tk
-from tkinter import filedialog
 import json
 import requests
-import os
+try:
+    from Tkinter import Entry, Frame, Label, StringVar
+    from Tkconstants import *
+except ImportError:
+    from tkinter import Entry, Frame, Label, StringVar
+    from tkinter.constants import *
 
 
 json_data = open('private.json')
@@ -433,49 +437,6 @@ def duelsstats(username):
 
 
 root = tk.Tk()
-apps = []
-
-if os.path.isfile("save.txt"):
-    with open("save.txt", "r") as f:
-        tempApps = f.read()
-        tempApps = tempApps.split(",")
-        apps = [x for x in tempApps if x.strip()]
-
-
-def addApp():
-    for widget in frame.winfo_children():
-        widget.destroy()
-
-    filename = filedialog.askopenfilename(initialdir = "/", title = "Select File",
-                                          filetypes = (("executables", "*.exe"), ("all files", "*.*")))
-    apps.append(filename)
-    print(filename)
-    for app in apps:
-        label = tk.Label(frame, text = app, bg = "#06d6a0")
-        label.pack()
-
-
-def runApps():
-    for app in apps:
-        os.startfile(app)
-
-
-def saveApps():
-    with open("save.txt", "w") as f:
-        for app in apps:
-            f.write(app + ",")
-
-
-def deleteApps():
-    open("save.txt", "w").close()
-
-
-try:
-    from Tkinter import Entry, Frame, Label, StringVar
-    from Tkconstants import *
-except ImportError:
-    from tkinter import Entry, Frame, Label, StringVar
-    from tkinter.constants import *
 
 
 def hex2rgb(str_rgb):
